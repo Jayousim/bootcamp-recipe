@@ -1,7 +1,10 @@
 const express = require('express')
-const request = require('request')
+const httprequest = require('request')
 const app = express()
 const url = 'https://recipes-goodness.herokuapp.com/recipes/'
+
+
+const exractRecipeData = u => { return { ingredients: u.ingredients, title: u.title, thumbnail: u.thumbnail, href: u.href}}
 
 const port = 3000
 app.listen(port, function(){
@@ -14,14 +17,18 @@ app.get('/sanity', function(req, res){
     res.send('fareed')
 })
 
-app.get('/recipes/:ingredient', function(req, res){
-    ingredient = req.params.ingredient
+app.get('/recipes/:ingredient', function(request, response){
+    ingredient = request.params.ingredient
+    console.log(ingredient)
     const options = {
         url: url + ingredient,
         method: 'GET'
     }
-    request(options, function(err, res, body){
-        console.log(body)
+    httprequest(options, function(err,res, body){
+        const bodyJson = JSON.parse(body)
+        const recipes = bodyJson.results
+        console.log(recipes[0])
+        response.end({ message: recipes });
     })
-    
 })
+

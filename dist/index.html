@@ -9,34 +9,34 @@
 </head>
 
 <body>
-    <div class="info" id="getRecipe">
-        <input type="text" id="item-input" placeholder="" class="css-input">
-        <a href="#" class="myButton" id="btn">Get Recipe</a>
+    <div id="search-query">
+        <input type="text" id="item-input" placeholder="whats in your mind?" class="css-input">
+        <button id="req-btn">Get Recipe</button>
     </div>
 
-    <div class="foodRecipe"> </div>
+    <div id="contaier"></div>
 
     <script id="recipe-template" type="text/x-handlebars-template">
-        {{#each recipes}}
-        <div class="recipe">
-            <a href="{{this.herf}}">{{this.title}}</a>
-            <br>
-            <img class="recipeImage" src="{{this.thumbnail}}" />
-            <br>
-            <div class="ing">Ingredients</div>
-            <ul class="ingredients">
-                {{#each this.ingredients}}
-                <li>{{this}}</li>
-                {{/each}}
-            </ul>
-
-
+        <div class="foodRecipe"> 
+            {{#each recipes}}
+            <div class="recipe">
+                <a href="{{this.herf}}">{{this.title}}</a>
+                <br>
+                <img class="recipeImage" src="{{this.thumbnail}}" />
+                <br>
+                <div >Ingredients</div>
+                <ul class="ingredients">
+                    {{#each this.ingredients}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
     </script>
-    <script src="./jquery/dist/jquery.js"></script>
-    <script src="./handlebars/dist/handlebars.js"></script>
-    <script src="render.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/handlebars/dist/handlebars.js"></script>
+    <script src="renderer.js"></script>
     <script src="main.js"></script>
 </body>
 
